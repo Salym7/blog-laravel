@@ -29,7 +29,12 @@ class PostService
     {
         try {
             DB::beginTransaction();
-            $tagIds = $data['tag_ids'];
+            if (isset($data['tag_ids'])) {
+                $tagIds = $data['tag_ids'];
+                unset($data['tag_ids']);
+            } else {
+                $tagIds = [];
+            }
             unset($data['tag_ids']);
             if (isset($data['preview_image'])) {
                 $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
