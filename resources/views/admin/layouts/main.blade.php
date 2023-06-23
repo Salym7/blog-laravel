@@ -8,6 +8,7 @@
   
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -65,6 +66,8 @@
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
+
 <script src="plugins/summernote/summernote-bs4.min.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button)
@@ -95,6 +98,7 @@
   $(function () {
     bsCustomFileInput.init();
   });
+  $('.select2').select2();
   </script>
   <style>
     .custom-file-input:lang(en)~.custom-file-label::after {
