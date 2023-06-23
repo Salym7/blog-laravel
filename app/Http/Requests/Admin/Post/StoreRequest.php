@@ -31,4 +31,11 @@ class StoreRequest extends FormRequest
             'tag_ids.*' => 'nullable|integer|exists:tags,id',
         ];
     }
+    public function messages()
+    {
+        return [
+            'title.required' => 'This field can\'t be empty',
+            'title.string' => 'Data must be string',
+        ];
+    }
 }

@@ -98,6 +98,9 @@
                 @endforeach
               </select>
             </div>
+            @error('tag_ids')
+            <div class="text-danger mb-2">{{$message}}</div>  
+            @enderror
             <div class="form_group">
               <input type="submit" class="btn btn-primary" value="Uodate">
             </div>
