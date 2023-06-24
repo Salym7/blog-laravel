@@ -18,6 +18,18 @@ Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
     Route::get('/', IndexController::class)->name('home');
 });
 
+Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'personal', 'middleware' => ['auth', 'verified']], function () {
+    Route::group(['namespace' => 'Main'], function () {
+        Route::get('/', IndexController::class)->name('personal.main.index');
+    });
+    Route::group(['namespace' => 'Liked'], function () {
+        Route::get('/liked', IndexController::class)->name('personal.liked.index');
+    });
+    Route::group(['namespace' => 'Comment'], function () {
+        Route::get('/comment', IndexController::class)->name('personal.comment.index');
+    });
+});
+
 Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
     Route::group(['namespace' => 'Main'], function () {
         Route::get('/', IndexController::class)->name('admin.main.index');
