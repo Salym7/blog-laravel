@@ -51,6 +51,29 @@
                       <td>Title</td>
                       <td>{{$post->title}}</td>
                     </tr>              
+                    <tr>
+                      <td>Content</td>
+                      <td>{{$post->content}}</td>
+                    </tr>              
+                    <tr>
+                      <td>preview</td>
+                      <td><img class="w-25" src="{{Storage::url($post->preview_image)}}" alt=""></td>
+                    </tr>              
+                    <tr>
+                      <td>main image</td>
+                      <td><img class="w-25" src="{{Storage::url($post->main_image)}}" alt=""></td>
+                    </tr>              
+                    <tr>
+                      <td>Category</td>
+                      <td>{{$category->title}}</td>
+                    </tr>              
+                    <tr>
+                      {{-- <td>Post</td>
+                      <td>@foreach ($tags as $tag)
+
+                          <span>{{tag->title}}</span>
+                      @endforeach</td>
+                    </tr>               --}}
                   </tbody>
                 </table>
               </div>
