@@ -9,6 +9,8 @@ class ShowController extends Controller
 {
     public function __invoke(User $user)
     {
-        return view('admin.user.show', compact('user'));
+        $role = User::getRoles();
+        $role = $role[$user->role];
+        return view('admin.user.show', compact('user', 'role'));
     }
 }

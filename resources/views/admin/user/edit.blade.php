@@ -46,6 +46,23 @@
             @error('email')
               <div class="text-danger mb-2">{{$message}}</div>  
             @enderror
+            <div class="form_group mb-3 w-50">
+              <label>Choose role</label>
+              <select name="role" id="" class="form-control">
+                @foreach ($roles as $id => $role)
+                <option value="{{$id}}"
+                @if (old('role'))
+                {{old('role') == $id ? ' selected' : ''}}
+                @else
+                {{$user->role == $id ? ' selected' : ''}}
+                @endif
+                  >{{$role}}</option>
+                @endforeach
+              </select> 
+            </div>
+            @error('role')
+            <div class="text-danger mb-2">{{$message}}</div>  
+            @enderror
             <input type="submit" class="btn btn-primary" value="Update">
            </form>
           </div>
