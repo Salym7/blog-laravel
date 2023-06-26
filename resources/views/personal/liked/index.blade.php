@@ -46,7 +46,7 @@
                     <td>{{$post->title}}</td>
                     <td><a href="{{route('admin.post.show', $post->id)}}"><i class="far fa-eye"></i></a></td>
                     <td>
-                      <form action="{{route('pesonal.loced.delete', $post->id)}}" method="POST">
+                      <form action="{{route('pesonal.liked.delete', $post->id)}}" method="POST">
                         @method('delete')
                         @csrf
                         <button type="submit" class="border-0 bg-transparent text-danger"><i class="fas fa-trash"></i></button>
