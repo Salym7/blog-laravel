@@ -24,6 +24,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'perso
     });
     Route::group(['namespace' => 'Liked'], function () {
         Route::get('/liked', IndexController::class)->name('personal.liked.index');
+        Route::delete('/liked/{post}', DeleteController::class)->name('personal.liked.delete');
     });
     Route::group(['namespace' => 'Comment'], function () {
         Route::get('/comment', IndexController::class)->name('personal.comment.index');
