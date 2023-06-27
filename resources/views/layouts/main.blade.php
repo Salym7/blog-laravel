@@ -27,6 +27,22 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('main.index')}}">Blog</a>
                         </li>
+                        <li class="nav-item">
+                            @auth
+                                <a class="nav-link" href="{{route('personal.main.index')}}">Personal room</a>
+                            @endauth
+                            @guest
+                                <a class="nav-link" href="{{route('personal.main.index')}}">login</a>
+                            @endguest
+                        </li>
+                        @auth
+                        <li class="nav-item">
+                            <form action="{{route('logout')}}" method="POST">
+                              @csrf
+                              <input class="btn btn-outline-primary" type="submit" value="Logout">
+                            </form>
+                          </li>
+                        @endauth
                     </ul>
                 </div>
             </nav>
