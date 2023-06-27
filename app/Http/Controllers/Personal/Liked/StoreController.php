@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Personal\Liked;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\Comment\StoreRequest;
+use App\Models\Comment;
 use App\Models\Post;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 
-class DeleteController extends Controller
+class StoreController extends Controller
 {
     public function __invoke(Post $post)
     {
-        auth()->user()->likedPosts()->detach($post->id);
+        auth()->user()->likedPosts()->toggle($post->id);
         return redirect()->route('personal.liked.index');
     }
 }

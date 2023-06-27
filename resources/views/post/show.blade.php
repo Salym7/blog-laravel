@@ -18,7 +18,9 @@
         <h1 class="edica-page-title" data-aos="fade-up">{{$post->title}}</h1>
         <p class="edica-blog-post-meta" data-aos="fade-up" data-aos-delay="200">{{$date}} •Featured • {{$post->comments->count()}} Comments</p>
         <section class="blog-post-featured-img" data-aos="fade-up" data-aos-delay="300">
-            <img src="{{Storage::url($post->main_image)}}" alt="featured image" class="w-100">
+            <div class="text-center">
+            <img src="{{Storage::url($post->main_image)}}" alt="featured image" class="w-50">
+        </div>
         </section>
         <section class="post-content">
             <div class="row">
@@ -29,18 +31,42 @@
         </section>
         <div class="row">
             <div class="col-lg-9 mx-auto">
-                <section class="related-posts">
-                    <h2 class="section-title mb-4" data-aos="fade-up">Related Posts</h2>
-                    <div class="row">
-                        @foreach ($reletedPosts as $reletedPost)
-                        <div class="col-md-4" data-aos="fade-right" data-aos-delay="100">
-                            <img src="{{Storage::url($reletedPost->main_image)}}" alt="related post" class="post-thumbnail">
-                            <p class="post-category">{{$reletedPost->category->title}}t</p>
-                            <a href="{{route('post.show',$reletedPost->id)}}"><h5 class="post-title">{{$reletedPost->title}}</h5></a>
-                        </div> 
-                        @endforeach
-                    </div>
+                <section class="py-3">
+                    @auth
+                        <form action="{{route('post.like.store',$post->id)}}" method="POST">
+                            @csrf
+                            <span>{{$post->liked_users_count}}</span>
+                            <button type="submit" class="border-0 bg-transparent">
+                                    @if(auth()->user()->likedPosts->contains($post->id))
+                                    <i class="fas fa-heart"></i>
+                                    @else
+                                    <i class="far fa-heart"></i>
+                                    @endif
+                                
+                            </button>
+                        </form>
+                        @endauth
+                        @guest
+                            <div>
+                                <span>{{$post->liked_users_count}}</span>
+                                <i class="far fa-heart"></i>
+                            </div>
+                        @endguest
                 </section>
+                @if($relatedPosts->count() > 0)
+                    <section class="related-posts">
+                        <h2 class="section-title mb-4" data-aos="fade-up">Related Posts</h2>
+                        <div class="row">
+                            @foreach ($relatedPosts as $relatedPost)
+                            <div class="col-md-4" data-aos="fade-right" data-aos-delay="100">
+                                <img src="{{Storage::url($relatedPost->main_image)}}" alt="related post" class="post-thumbnail">
+                                <p class="post-category">{{$relatedPost->category->title}}t</p>
+                                <a href="{{route('post.show',$relatedPost->id)}}"><h5 class="post-title">{{$relatedPost->title}}</h5></a>
+                            </div> 
+                            @endforeach
+                        </div>
+                    </section>
+                @endif
                 <section class="comment-list mb-5">
                     <h3 class="section-title mb-5">Comments ({{$post->comments->count()}})</h3>
                     @foreach ($post->comments as $comment)

@@ -34,9 +34,7 @@
                   <tr>
                     <th>ID</th>
                     <th>Title</th>
-                    <th>Look</th>
-                    <th>Edit</th>
-                    <th>Delet</th>
+                    <th>Liked</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -44,14 +42,26 @@
                   <tr>
                     <td>{{$post->id}}</td>
                     <td>{{$post->title}}</td>
-                    <td><a href="{{route('admin.post.show', $post->id)}}"><i class="far fa-eye"></i></a></td>
+                    <td><form action="{{route('personal.liked.store',$post->id)}}" method="POST">
+                      @csrf
+                      <button type="submit" class="border-0 bg-transparent">
+                          @auth
+                              @if(auth()->user()->likedPosts->contains($post->id))
+                              <i class="fas fa-heart"></i>
+                              @else
+                              <i class="far fa-heart"></i>
+                              @endif
+                          @endauth
+                      </button>
+                  </form></td>
+                    {{-- <td><a href="{{route('admin.post.show', $post->id)}}"><i class="far fa-eye"></i></a></td>
                     <td>
                       <form action="{{route('pesonal.liked.delete', $post->id)}}" method="POST">
                         @method('delete')
                         @csrf
                         <button type="submit" class="border-0 bg-transparent text-danger"><i class="fas fa-trash"></i></button>
                       </form>
-                    </td>
+                    </td> --}}
                   </tr>  
                   @endforeach
                   

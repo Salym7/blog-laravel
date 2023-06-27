@@ -17,12 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
     Route::get('/', IndexController::class)->name('main.index');
 });
+
+
 Route::group(['namespace' => 'App\Http\Controllers\Post', 'prefix' => 'posts'], function () {
     Route::get('/', IndexController::class)->name('post.index');
     Route::get('/{post}', ShowController::class)->name('post.show');
 
     Route::group(['namespace' => 'Comment'], function () {
         Route::post('{post}/comments', StoreController::class)->name('post.comment.store');
+    });
+    Route::group(['namespace' => 'Like'], function () {
+        Route::post('{post}/likes', StoreController::class)->name('post.like.store');
     });
 });
 
@@ -34,7 +39,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'perso
     });
     Route::group(['namespace' => 'Liked'], function () {
         Route::get('/liked', IndexController::class)->name('personal.liked.index');
-        Route::delete('/liked/{post}', DeleteController::class)->name('personal.liked.delete');
+        Route::post('/liked/{post}', StoreController::class)->name('personal.liked.store');
     });
     Route::group(['namespace' => 'Comment'], function () {
         Route::get('/comment', IndexController::class)->name('personal.comment.index');

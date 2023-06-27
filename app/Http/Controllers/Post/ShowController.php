@@ -13,10 +13,10 @@ class ShowController extends Controller
     {
         $date = Carbon::parse($post->created_at);
         $date = $date->format("M • d • Y • H:i");
-        $reletedPosts = Post::where('category_id', $post->category_id)
+        $relatedPosts = Post::where('category_id', $post->category_id)
             ->where('id', '!=', $post->id)
             ->get()
             ->take(3);
-        return view('post.show', compact('post', 'date', 'reletedPosts'));
+        return view('post.show', compact('post', 'date', 'relatedPosts'));
     }
 }
