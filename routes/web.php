@@ -91,6 +91,14 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
     });
 });
 
+Route::group(['namespace' => 'App\Http\Controllers\Category'], function () {
+    Route::get('/categories', IndexController::class)->name('category.index');
+
+    Route::group(['namespace' => 'Post'], function () {
+        Route::get('/categories/{category}/posts', IndexController::class)->name('category.post.index');
+    });
+});
+
 Auth::routes(['verify' => true]);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
